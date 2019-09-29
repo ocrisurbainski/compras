@@ -5,7 +5,9 @@ import org.bson.codecs.configuration.CodecProvider;
 import org.bson.codecs.configuration.CodecRegistry;
 
 import br.com.urbainski.backend.codec.ClienteCodec;
+import br.com.urbainski.backend.codec.ProdutoCodec;
 import br.com.urbainski.backend.entity.Cliente;
+import br.com.urbainski.backend.entity.Produto;
 
 /**
  * 
@@ -20,6 +22,8 @@ public class MyCodecProvider implements CodecProvider {
 	public <T> Codec<T> get(Class<T> clazz, CodecRegistry registry) {
 		if (clazz == Cliente.class) {
 			return (Codec<T>) new ClienteCodec();
+		} else if (clazz == Produto.class) {
+			return (Codec<T>) new ProdutoCodec();
 		}
 		return null;
 	}
