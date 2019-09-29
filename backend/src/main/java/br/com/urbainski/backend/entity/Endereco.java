@@ -11,23 +11,23 @@ import javax.validation.constraints.Size;
  */
 public class Endereco {
 
-	@Size(min = 8, max = 8, message = "endereco.cep.Size")
-	@NotEmpty(message = "endereco.cep.NotEmpty")
+	@Size(min = 8, max = 8, message = "{endereco.cep.Size}")
+	@NotEmpty(message = "{endereco.cep.NotEmpty}")
 	private String cep;
 	
-	@NotEmpty(message = "endereco.logradouro.NotEmpty")
+	@NotEmpty(message = "{endereco.logradouro.NotEmpty}")
 	private String logradouro;
 	
-	@NotEmpty(message = "endereco.bairro.NotEmpty")
+	@NotEmpty(message = "{endereco.bairro.NotEmpty}")
 	private String bairro;
 	
-	@NotEmpty(message = "endereco.numero.NotEmpty")
+	@NotEmpty(message = "{endereco.numero.NotEmpty}")
 	private String numero;
 	
-	@NotEmpty(message = "endereco.municipio.NotEmpty")
+	@NotEmpty(message = "{endereco.municipio.NotEmpty}")
 	private String municipio;
 	
-	@NotEmpty(message = "endereco.estado.NotEmpty")
+	@NotEmpty(message = "{endereco.estado.NotEmpty}")
 	private String siglaEstado;
 	
 	private String complemento;

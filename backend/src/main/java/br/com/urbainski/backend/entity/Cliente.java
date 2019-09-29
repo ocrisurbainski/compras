@@ -1,5 +1,6 @@
 package br.com.urbainski.backend.entity;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -34,6 +35,7 @@ public class Cliente {
 	private String numeroDocumento;
 
 	@NotNull
+	@Valid
 	private Endereco endereco;
 
 	public String getId() {
