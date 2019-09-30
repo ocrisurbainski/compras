@@ -13,11 +13,11 @@ import org.bson.codecs.Codec;
 import org.bson.codecs.CollectibleCodec;
 import org.bson.codecs.DecoderContext;
 import org.bson.codecs.EncoderContext;
-import org.bson.types.Decimal128;
 
 import com.mongodb.MongoClient;
 
 import br.com.urbainski.backend.entity.Produto;
+import br.com.urbainski.backend.mapper.ProdutoMapper;
 
 /**
  * 
@@ -34,12 +34,8 @@ public class ProdutoCodec implements CollectibleCodec<Produto> {
 	}
 
 	@Override
-	public void encode(BsonWriter writer, Produto value, EncoderContext encoderContext) {
-		Document doc = new Document();
-		doc.put(Produto.Campos._id.name(), value.getId());
-		doc.put(Produto.Campos.nome.name(), value.getNome());
-		doc.put(Produto.Campos.marca.name(), value.getMarca());
-		doc.put(Produto.Campos.valorVenda.name(), value.getValorVenda());
+	public void encode(BsonWriter writer, Produto produto, EncoderContext encoderContext) {
+		Document doc = ProdutoMapper.toDocument(produto);
 		documentCodec.encode(writer, doc, encoderContext);
 	}
 
@@ -51,31 +47,25 @@ public class ProdutoCodec implements CollectibleCodec<Produto> {
 	@Override
 	public Produto decode(BsonReader reader, DecoderContext decoderContext) {
 		Document document = documentCodec.decode(reader, decoderContext);
+		return ProdutoMapper.toEntity(document);
+	}
 
-		Produto produto = new Produto();
-		produto.setId(document.getString(Produto.Campos._id.name()));
-		produto.setNome(document.getString(Produto.Campos.nome.name()));
-		produto.setMarca(document.getString(Produto.Campos.marca.name()));
-		produto.setValorVenda(document.get(Produto.Campos.valorVenda.name(), Decimal128.class).bigDecimalValue());
+	@Override
+	public Produto generateIdIfAbsentFromDocument(Produto produto) {
+		if (!documentHasId(produto)) {
+			produto.setId(UUID.randomUUID().toString());
+		}
 		return produto;
 	}
 
 	@Override
-	public Produto generateIdIfAbsentFromDocument(Produto document) {
-		if (!documentHasId(document)) {
-			document.setId(UUID.randomUUID().toString());
-		}
-		return document;
+	public boolean documentHasId(Produto produto) {
+		return isNotEmpty(produto.getId());
 	}
 
 	@Override
-	public boolean documentHasId(Produto document) {
-		return isNotEmpty(document.getId());
-	}
-
-	@Override
-	public BsonValue getDocumentId(Produto document) {
-		return new BsonString(document.getId());
+	public BsonValue getDocumentId(Produto produto) {
+		return new BsonString(produto.getId());
 	}
 
 }
