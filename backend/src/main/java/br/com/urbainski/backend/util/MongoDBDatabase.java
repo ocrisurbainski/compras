@@ -14,6 +14,6 @@ public abstract class MongoDBDatabase {
 	
 	public static final String PRODUTOS_COLLECTION = "produtos";
 	
-	public static final String VENDAS_COLLECTION = "vendas";
+	public static final String COMPRAS_COLLECTION = "compras";
 	
 }

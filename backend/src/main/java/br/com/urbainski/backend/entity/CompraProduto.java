@@ -11,21 +11,21 @@ import javax.validation.constraints.NotNull;
  * @since 29/09/2019
  *
  */
-public class VendaProduto {
+public class CompraProduto {
 
-	@NotNull(message = "{vendaProduto.produto.NotNull}")
+	@NotNull(message = "{compraProduto.produto.NotNull}")
 	private Produto produto;
 
-	@NotNull(message = "{vendaProduto.valorVenda.NotNull}")
-	@DecimalMin(value = "0.01", message = "{vendaProduto.valorVenda.DecimalMin}")
-	private BigDecimal valorVenda;
+	@NotNull(message = "{compraProduto.valorUnitario.NotNull}")
+	@DecimalMin(value = "0.01", message = "{compraProduto.valorUnitario.DecimalMin}")
+	private BigDecimal valorUnitario;
 
-	@NotNull(message = "{vendaProduto.quantidade.NotNull}")
-	@DecimalMin(value = "0.01", message = "{vendaProduto.quantidade.DecimalMin}")
+	@NotNull(message = "{compraProduto.quantidade.NotNull}")
+	@DecimalMin(value = "0.01", message = "{compraProduto.quantidade.DecimalMin}")
 	private BigDecimal quantidade;
 
-	@NotNull(message = "{vendaProduto.valorTotal.NotNull}")
-	@DecimalMin(value = "0.01", message = "{vendaProduto.valorTotal.DecimalMin}")
+	@NotNull(message = "{compraProduto.valorTotal.NotNull}")
+	@DecimalMin(value = "0.01", message = "{compraProduto.valorTotal.DecimalMin}")
 	private BigDecimal valorTotal;
 
 	public Produto getProduto() {
@@ -36,12 +36,12 @@ public class VendaProduto {
 		this.produto = produto;
 	}
 
-	public BigDecimal getValorVenda() {
-		return valorVenda;
+	public BigDecimal getValorUnitario() {
+		return valorUnitario;
 	}
-
-	public void setValorVenda(BigDecimal valorVenda) {
-		this.valorVenda = valorVenda;
+	
+	public void setValorUnitario(BigDecimal valorUnitario) {
+		this.valorUnitario = valorUnitario;
 	}
 
 	public BigDecimal getQuantidade() {
@@ -64,7 +64,7 @@ public class VendaProduto {
 
 		produto,
 
-		valorVenda,
+		valorUnitario,
 
 		quantidade,
 

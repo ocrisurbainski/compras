@@ -10,8 +10,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import br.com.urbainski.backend.entity.Venda;
-import br.com.urbainski.backend.service.VendaService;
+import br.com.urbainski.backend.entity.Compra;
+import br.com.urbainski.backend.service.CompraService;
 
 /**
  * 
@@ -19,15 +19,15 @@ import br.com.urbainski.backend.service.VendaService;
  * @since 29/09/2019
  *
  */
-@Path("/vendas")
+@Path("/compras")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class VendaResource {
+public class CompraResource {
 	
-	@Inject VendaService vendaService;
+	@Inject CompraService vendaService;
 	
 	@POST
-	public Response save(@Valid Venda venda) {
+	public Response save(@Valid Compra venda) {
 		vendaService.save(venda);
 		return Response.status(Status.CREATED).entity(venda).build();
 	}

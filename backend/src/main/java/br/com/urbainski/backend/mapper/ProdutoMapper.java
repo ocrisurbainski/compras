@@ -18,18 +18,18 @@ public abstract class ProdutoMapper {
 		doc.put(Produto.Campos._id.name(), produto.getId());
 		doc.put(Produto.Campos.nome.name(), produto.getNome());
 		doc.put(Produto.Campos.marca.name(), produto.getMarca());
-		doc.put(Produto.Campos.valorVenda.name(), produto.getValorVenda());
+		doc.put(Produto.Campos.preco.name(), produto.getPreco());
 		return doc;
 	}
 
 	public static Produto toEntity(Document document) {
-		Decimal128 valorVenda = document.get(Produto.Campos.valorVenda.name(), Decimal128.class);
-		
+		Decimal128 preco = document.get(Produto.Campos.preco.name(), Decimal128.class);
+
 		Produto produto = new Produto();
 		produto.setId(document.getString(Produto.Campos._id.name()));
 		produto.setNome(document.getString(Produto.Campos.nome.name()));
 		produto.setMarca(document.getString(Produto.Campos.marca.name()));
-		produto.setValorVenda(valorVenda.bigDecimalValue());
+		produto.setPreco(preco.bigDecimalValue());
 		return produto;
 	}
 

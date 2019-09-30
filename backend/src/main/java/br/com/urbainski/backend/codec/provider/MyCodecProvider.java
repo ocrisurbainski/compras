@@ -6,10 +6,10 @@ import org.bson.codecs.configuration.CodecRegistry;
 
 import br.com.urbainski.backend.codec.ClienteCodec;
 import br.com.urbainski.backend.codec.ProdutoCodec;
-import br.com.urbainski.backend.codec.VendaCodec;
+import br.com.urbainski.backend.codec.CompraCodec;
 import br.com.urbainski.backend.entity.Cliente;
 import br.com.urbainski.backend.entity.Produto;
-import br.com.urbainski.backend.entity.Venda;
+import br.com.urbainski.backend.entity.Compra;
 
 /**
  * 
@@ -26,8 +26,8 @@ public class MyCodecProvider implements CodecProvider {
 			return (Codec<T>) new ClienteCodec();
 		} else if (clazz == Produto.class) {
 			return (Codec<T>) new ProdutoCodec();
-		} else if (clazz == Venda.class) {
-			return (Codec<T>) new VendaCodec();
+		} else if (clazz == Compra.class) {
+			return (Codec<T>) new CompraCodec();
 		}
 		return null;
 	}

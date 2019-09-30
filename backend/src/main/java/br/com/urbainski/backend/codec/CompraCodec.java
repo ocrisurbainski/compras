@@ -16,8 +16,8 @@ import org.bson.codecs.EncoderContext;
 
 import com.mongodb.MongoClient;
 
-import br.com.urbainski.backend.entity.Venda;
-import br.com.urbainski.backend.mapper.VendaMapper;
+import br.com.urbainski.backend.entity.Compra;
+import br.com.urbainski.backend.mapper.CompraMapper;
 
 /**
  * 
@@ -25,47 +25,47 @@ import br.com.urbainski.backend.mapper.VendaMapper;
  * @since 29/09/2019
  *
  */
-public class VendaCodec implements CollectibleCodec<Venda> {
+public class CompraCodec implements CollectibleCodec<Compra> {
 
 	private final Codec<Document> documentCodec;
 
-	public VendaCodec() {
+	public CompraCodec() {
 		this.documentCodec = MongoClient.getDefaultCodecRegistry().get(Document.class);
 	}
 
 	@Override
-	public void encode(BsonWriter writer, Venda venda, EncoderContext encoderContext) {
-		Document doc = VendaMapper.toDocument(venda);
+	public void encode(BsonWriter writer, Compra compra, EncoderContext encoderContext) {
+		Document doc = CompraMapper.toDocument(compra);
 		documentCodec.encode(writer, doc, encoderContext);
 	}
 
 	@Override
-	public Class<Venda> getEncoderClass() {
-		return Venda.class;
+	public Class<Compra> getEncoderClass() {
+		return Compra.class;
 	}
 
 	@Override
-	public Venda decode(BsonReader reader, DecoderContext decoderContext) {
+	public Compra decode(BsonReader reader, DecoderContext decoderContext) {
 		Document document = documentCodec.decode(reader, decoderContext);
-		return VendaMapper.toEntity(document);
+		return CompraMapper.toEntity(document);
 	}
 
 	@Override
-	public Venda generateIdIfAbsentFromDocument(Venda venda) {
-		if (!documentHasId(venda)) {
-			venda.setId(UUID.randomUUID().toString());
+	public Compra generateIdIfAbsentFromDocument(Compra compra) {
+		if (!documentHasId(compra)) {
+			compra.setId(UUID.randomUUID().toString());
 		}
-		return venda;
+		return compra;
 	}
 
 	@Override
-	public boolean documentHasId(Venda venda) {
-		return isNotEmpty(venda.getId());
+	public boolean documentHasId(Compra compra) {
+		return isNotEmpty(compra.getId());
 	}
 
 	@Override
-	public BsonValue getDocumentId(Venda venda) {
-		return new BsonString(venda.getId());
+	public BsonValue getDocumentId(Compra compra) {
+		return new BsonString(compra.getId());
 	}
-	
+
 }

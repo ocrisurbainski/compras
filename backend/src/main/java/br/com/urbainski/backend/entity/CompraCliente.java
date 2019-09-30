@@ -8,7 +8,7 @@ import br.com.urbainski.backend.entity.enums.TipoPessoa;
  * @since 27/09/2019
  *
  */
-public class VendaCliente {
+public class CompraCliente {
 
 	private String id;
 
@@ -76,7 +76,7 @@ public class VendaCliente {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		VendaCliente other = (VendaCliente) obj;
+		CompraCliente other = (CompraCliente) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

@@ -17,28 +17,28 @@ import br.com.urbainski.backend.entity.enums.SituacaoEntrega;
  * @since 29/09/2019
  *
  */
-public class Venda {
+public class Compra {
 
 	private String id;
 
-	@NotNull(message = "{venda.cliente.NotNull}")
-	private VendaCliente cliente;
+	@NotNull(message = "{compra.cliente.NotNull}")
+	private CompraCliente cliente;
 
-	@NotNull(message = "{venda.enderecoEntrega.NotNull}")
+	@NotNull(message = "{compra.enderecoEntrega.NotNull}")
 	private Endereco enderecoEntrega;
 
-	@NotNull(message = "{venda.valorTotal.NotNull}")
-	@DecimalMin(value = "0.01", message = "{venda.valorTotal.DecimalMin}")
+	@NotNull(message = "{compra.valorTotal.NotNull}")
+	@DecimalMin(value = "0.01", message = "{compra.valorTotal.DecimalMin}")
 	private BigDecimal valorTotal;
 
-	@NotNull(message = "{venda.quantidadeTotal.NotNull}")
-	@DecimalMin(value = "0.01", message = "{venda.quantidadeTotal.DecimalMin}")
+	@NotNull(message = "{compra.quantidadeTotal.NotNull}")
+	@DecimalMin(value = "0.01", message = "{compra.quantidadeTotal.DecimalMin}")
 	private BigDecimal quantidadeTotal;
 
 	@Valid
-	@NotNull(message = "{venda.produtos.NotNull}")
-	@Size(min = 1, message = "{venda.produtos.Size}")
-	private List<VendaProduto> produtos;
+	@NotNull(message = "{compra.produtos.NotNull}")
+	@Size(min = 1, message = "{compra.produtos.Size}")
+	private List<CompraProduto> produtos;
 
 	private SituacaoEntrega situacaoEntrega;
 
@@ -50,11 +50,11 @@ public class Venda {
 		this.id = id;
 	}
 
-	public VendaCliente getCliente() {
+	public CompraCliente getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(VendaCliente cliente) {
+	public void setCliente(CompraCliente cliente) {
 		this.cliente = cliente;
 	}
 
@@ -82,14 +82,14 @@ public class Venda {
 		this.quantidadeTotal = quantidadeTotal;
 	}
 
-	public List<VendaProduto> getProdutos() {
+	public List<CompraProduto> getProdutos() {
 		if (produtos == null) {
-			produtos = new ArrayList<VendaProduto>();
+			produtos = new ArrayList<CompraProduto>();
 		}
 		return produtos;
 	}
 
-	public void setProdutos(List<VendaProduto> produtos) {
+	public void setProdutos(List<CompraProduto> produtos) {
 		this.produtos = produtos;
 	}
 

@@ -24,9 +24,9 @@ public class Produto {
 	@NotEmpty(message = "{produto.marca.NotEmpty}")
 	private String marca;
 
-	@NotNull(message = "{produto.valorVenda.NotNull}")
-	@DecimalMin(value = "0.01", message = "{produto.valorVenda.DecimalMin}")
-	private BigDecimal valorVenda;
+	@NotNull(message = "{produto.preco.NotNull}")
+	@DecimalMin(value = "0.01", message = "{produto.preco.DecimalMin}")
+	private BigDecimal preco;
 
 	public String getId() {
 		return id;
@@ -52,12 +52,12 @@ public class Produto {
 		this.marca = marca;
 	}
 
-	public BigDecimal getValorVenda() {
-		return valorVenda;
+	public BigDecimal getPreco() {
+		return preco;
 	}
-
-	public void setValorVenda(BigDecimal valorVenda) {
-		this.valorVenda = valorVenda;
+	
+	public void setPreco(BigDecimal preco) {
+		this.preco = preco;
 	}
 
 	@Override
@@ -87,9 +87,9 @@ public class Produto {
 
 	@Override
 	public String toString() {
-		return "Produto [id=" + id + ", nome=" + nome + ", marca=" + marca + ", valorVenda=" + valorVenda + "]";
+		return "Produto [id=" + id + ", nome=" + nome + ", marca=" + marca + ", preco=" + preco + "]";
 	}
-	
+
 	public static enum Campos {
 		
 		_id,
@@ -98,7 +98,7 @@ public class Produto {
 		
 		marca,
 		
-		valorVenda;
+		preco;
 		
 	}
 
