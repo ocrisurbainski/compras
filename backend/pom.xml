@@ -11,6 +11,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<surefire-plugin.version>2.22.0</surefire-plugin.version>
 		<quarkus.version>0.22.0</quarkus.version>
+		<rabbitmq.version>5.7.3</rabbitmq.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
@@ -56,6 +57,11 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.rabbitmq</groupId>
+			<artifactId>amqp-client</artifactId>
+			<version>${rabbitmq.version}</version>
 		</dependency>
 	</dependencies>
 	<build>

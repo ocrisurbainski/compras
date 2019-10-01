@@ -6,7 +6,12 @@ import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 
+import org.apache.commons.lang3.StringUtils;
+import org.bson.Document;
+import org.bson.conversions.Bson;
+
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
 
 import br.com.urbainski.backend.entity.Compra;
 import br.com.urbainski.backend.entity.enums.SituacaoEntrega;
@@ -28,6 +33,24 @@ public class CompraService extends AbstractService {
 		getCollection().insertOne(compra);
 		return compra;
 	}
+	
+	public void updateSituacaoEntrega(String id, SituacaoEntrega situacaoEntrega) {
+		if (StringUtils.isEmpty(id)) {
+			throw new IllegalArgumentException("Id deve ser informado.");
+		}
+		if (situacaoEntrega == null) {
+			throw new IllegalArgumentException("Situação de entrega deve ser informado.");
+		}
+		Bson filter = getFilterById(id);
+		
+		Document prop = new Document();
+		prop.put(Compra.Campos.situacaoEntrega.name(), situacaoEntrega.name());
+		
+		Document update = new Document();
+		update.put("$set", prop);
+		
+		getCollection().updateOne(filter, update);
+	}
 
 	public PageResponse<Compra> findAll(PageRequest page) {
 		MongoCollection<Compra> mongoCollection = getCollection();
@@ -38,6 +61,10 @@ public class CompraService extends AbstractService {
 
 	public MongoCollection<Compra> getCollection() {
 		return getMongoDatabase().getCollection(COMPRAS_COLLECTION, Compra.class);
+	}
+	
+	private Bson getFilterById(String id) {
+		return Filters.eq("_id", id);
 	}
 
 }

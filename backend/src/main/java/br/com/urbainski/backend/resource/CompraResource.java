@@ -11,6 +11,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import br.com.urbainski.backend.entity.Compra;
+import br.com.urbainski.backend.rabbitmq.publisher.CompraPublisher;
 import br.com.urbainski.backend.service.CompraService;
 
 /**
@@ -26,10 +27,13 @@ public class CompraResource {
 	
 	@Inject CompraService vendaService;
 	
+	@Inject CompraPublisher compraPublisher;
+	
 	@POST
-	public Response save(@Valid Compra venda) {
-		vendaService.save(venda);
-		return Response.status(Status.CREATED).entity(venda).build();
+	public Response save(@Valid Compra compra) {
+		vendaService.save(compra);
+		compraPublisher.publish(compra);
+		return Response.status(Status.CREATED).entity(compra).build();
 	}
 
 }
