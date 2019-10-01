@@ -3,11 +3,13 @@ package br.com.urbainski.backend.mapper;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.bson.Document;
 import org.bson.types.Decimal128;
 
 import br.com.urbainski.backend.entity.Compra;
 import br.com.urbainski.backend.entity.CompraProduto;
+import br.com.urbainski.backend.entity.enums.SituacaoEntrega;
 
 /**
  * 
@@ -49,6 +51,8 @@ public abstract class CompraMapper {
 		for (Document vendaProdutoDoc : vendaProdutosDocs) {
 			produtos.add(CompraProdutoMapper.toEntity(vendaProdutoDoc));
 		}
+		
+		String situacaoEntrega = document.getString(Compra.Campos.situacaoEntrega.name());
 
 		Compra compra = new Compra();
 		compra.setId(document.getString(Compra.Campos._id.name()));
@@ -56,6 +60,11 @@ public abstract class CompraMapper {
 		compra.setValorTotal(valorTotal.bigDecimalValue());
 		compra.setCliente(CompraClienteMapper.toEntity(docCliente));
 		compra.setEnderecoEntrega(EnderecoMapper.toEntity(docEnderecoEntrega));
+		compra.setProdutos(produtos);
+		
+		if (StringUtils.isNotBlank(situacaoEntrega)) {
+			compra.setSituacaoEntrega(SituacaoEntrega.valueOf(situacaoEntrega));
+		}
 		return compra;
 	}
 
