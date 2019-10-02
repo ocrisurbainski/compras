@@ -2,6 +2,7 @@ package br.com.urbainski.backend.service;
 
 import static br.com.urbainski.backend.util.MongoDBDatabase.COMPRAS_COLLECTION;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -29,6 +30,7 @@ import br.com.urbainski.backend.pagination.Pagination;
 public class CompraService extends AbstractService {
 
 	public Compra save(Compra compra) {
+		compra.setDataCompra(Calendar.getInstance());
 		compra.setSituacaoEntrega(SituacaoEntrega.AGUARDANDO);
 		getCollection().insertOne(compra);
 		return compra;

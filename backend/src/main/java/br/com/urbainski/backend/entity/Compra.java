@@ -2,6 +2,7 @@ package br.com.urbainski.backend.entity;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -34,6 +35,8 @@ public class Compra {
 	@NotNull(message = "{compra.quantidadeTotal.NotNull}")
 	@DecimalMin(value = "0.01", message = "{compra.quantidadeTotal.DecimalMin}")
 	private BigDecimal quantidadeTotal;
+	
+	private Calendar dataCompra;
 
 	@Valid
 	@NotNull(message = "{compra.produtos.NotNull}")
@@ -92,6 +95,14 @@ public class Compra {
 	public void setProdutos(List<CompraProduto> produtos) {
 		this.produtos = produtos;
 	}
+	
+	public Calendar getDataCompra() {
+		return dataCompra;
+	}
+	
+	public void setDataCompra(Calendar dataCompra) {
+		this.dataCompra = dataCompra;
+	}
 
 	public SituacaoEntrega getSituacaoEntrega() {
 		return situacaoEntrega;
@@ -112,6 +123,8 @@ public class Compra {
 		valorTotal,
 
 		quantidadeTotal,
+		
+		dataCompra,
 
 		produtos,
 

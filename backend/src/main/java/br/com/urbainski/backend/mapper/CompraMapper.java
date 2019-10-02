@@ -1,6 +1,7 @@
 package br.com.urbainski.backend.mapper;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -33,6 +34,7 @@ public abstract class CompraMapper {
 		doc.put(Compra.Campos.situacaoEntrega.name(), compra.getSituacaoEntrega().name());
 		doc.put(Compra.Campos.cliente.name(), CompraClienteMapper.toDocument(compra.getCliente()));
 		doc.put(Compra.Campos.enderecoEntrega.name(), EnderecoMapper.toDocument(compra.getEnderecoEntrega()));
+		doc.put(Compra.Campos.dataCompra.name(), compra.getDataCompra().getTimeInMillis());
 		doc.put(Compra.Campos.produtos.name(), vendaProdutosDocs);
 		return doc;
 	}
@@ -52,6 +54,10 @@ public abstract class CompraMapper {
 			produtos.add(CompraProdutoMapper.toEntity(vendaProdutoDoc));
 		}
 		
+		Long longDataCompra = document.getLong(Compra.Campos.dataCompra.name());
+		Calendar dataCompra = Calendar.getInstance();
+		dataCompra.setTimeInMillis(longDataCompra);
+		
 		String situacaoEntrega = document.getString(Compra.Campos.situacaoEntrega.name());
 
 		Compra compra = new Compra();
@@ -60,6 +66,7 @@ public abstract class CompraMapper {
 		compra.setValorTotal(valorTotal.bigDecimalValue());
 		compra.setCliente(CompraClienteMapper.toEntity(docCliente));
 		compra.setEnderecoEntrega(EnderecoMapper.toEntity(docEnderecoEntrega));
+		compra.setDataCompra(dataCompra);
 		compra.setProdutos(produtos);
 		
 		if (StringUtils.isNotBlank(situacaoEntrega)) {
