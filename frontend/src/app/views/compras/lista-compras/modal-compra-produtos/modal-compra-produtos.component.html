@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Produtos comprados</h4>
+</div>
+<div class="modal-body">
+    <table class="table table-bordered table-hover bg-white mt-2">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Marca</th>
+                <th>Valor unitário</th>
+                <th>Quantidade</th>
+                <th>Valor total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let compraProduto of produtos">
+                <td>{{ compraProduto.produto.nome }}</td>
+                <td>{{ compraProduto.produto.marca }}</td>
+                <td>{{ compraProduto.valorUnitario | currency:'BRL' }}</td>
+                <td>{{ compraProduto.quantidade }}</td>
+                <td>{{ compraProduto.valorTotal | currency:'BRL' }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="bsModalRef.hide()">Fechar</button>
+</div>
