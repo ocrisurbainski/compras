@@ -1,1 +1,48 @@
-<app-page-title title="Lista de compras"></app-page-title>
+<form name="formListaCompras">
+    <app-page-title title="Lista de compras"></app-page-title>
+     <table class="table table-bordered bg-white mt-2" [ngClass]="{ 'table-hover' : compras.length > 0 }">
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Endereço</th>
+                <th>Data de compra</th>
+                <th>Quant. produtos</th>
+                <th>Status</th>
+                <th>Valor total</th>
+                <th class="col-opcoes">Opções</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngIf="compras.length > 0">
+                <tr *ngFor="let compra of compras">
+                    <td>{{ compra.cliente.nome }} - {{ compra.cliente.numeroDocumento | cnpjCpf }}</td>
+                    <td>{{ compra.enderecoEntrega.logradouro }}, {{ compra.enderecoEntrega.bairro }}, nº {{ compra.enderecoEntrega.numero }}, {{ compra.enderecoEntrega.municipio }} {{ compra.enderecoEntrega.siglaEstado }}, CEP: {{ compra.enderecoEntrega.cep | cep }} </td>
+                    <td>{{ compra.dataCompra }}</td>
+                    <td>{{ compra.quantidadeTotal }}</td>
+                    <td>{{ compra.situacaoEntrega }}</td>
+                    <td>{{ compra.valorTotal | currency:'BRL' }}</td>
+                    <td>
+                        <div class="d-flex justify-content-around">
+                            <button type="button" class="btn border border-primary"
+                                tooltip="Visualizar produtos desta compra." placement="left"
+                                container="body" (click)="openModalProdutos(compra)">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </ng-container>
+            <ng-container *ngIf="compras.length == 0">
+                <tr>
+                    <td colspan="5">
+                        Nenhuma compra foi encontrada.
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+    <pagination [totalItems]="totalItens" [itemsPerPage]="itemsPerPage" (pageChanged)="pageChanged($event)" 
+        [(ngModel)]="currentPage" [ngModelOptions]="{standalone: true}"
+        previousText="Anterior" nextText="Próxima">
+    </pagination>
+</form>
