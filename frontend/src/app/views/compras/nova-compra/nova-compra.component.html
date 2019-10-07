@@ -63,7 +63,7 @@
                             <i class="fas fa-search"></i>
                         </span>
                     </div>
-                <div *ngIf="prodCompra.controls.produtoDesc.invalid && (formSubmitted || dirty || prodCompra.controls.produtoDesc.touched)" class="invalid-feedback">
+                <div *ngIf="prodCompra.controls.produtoDesc.invalid && (formSubmitted || prodCompra.controls.produtoDesc.dirty || prodCompra.controls.produtoDesc.touched)" class="invalid-feedback">
                     <p>Campo obrigatório.</p>
                 </div>
             </div>
