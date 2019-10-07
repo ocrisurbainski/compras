@@ -12,7 +12,15 @@ export class CompraService extends AbstractService {
 
 	constructor(private http : HttpClient) {
 		super();
-	 }
+	}
+
+	save(compra : Compra) : Observable<Compra> {
+		let url : string = this.getCompleteUrl('/compras');
+		return this.http.post<Compra>(url, compra).pipe(
+			retry(1),
+			catchError(this.handleError)
+		);
+	}
 
 	findAll(page : number, size : number) : Observable<Compra[]> {
 		let params = new HttpParams().set('page', String(page)).set('size', String(size));

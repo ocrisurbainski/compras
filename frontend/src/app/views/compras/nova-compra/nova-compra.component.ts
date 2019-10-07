@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BsModalService, ModalOptions } from 'ngx-bootstrap';
 import { Cliente } from 'src/app/entity/cliente';
-import { ModalOptions, BsModalService } from 'ngx-bootstrap';
-import { ModalSelecaoClienteComponent } from '../../clientes/modal-selecao-cliente/modal-selecao-cliente.component';
 import { Endereco } from 'src/app/entity/endereco';
 import { CepPipe } from 'src/app/pipe/cep.pipe';
-import { CompraProduto } from 'src/app/entity/compra-produto';
+import { CompraService } from 'src/app/service/compra.service';
+import { ModalSelecaoClienteComponent } from '../../clientes/modal-selecao-cliente/modal-selecao-cliente.component';
 import { ModalSelecaoProdutoComponent } from '../../produto/modal-selecao-produto/modal-selecao-produto.component';
-import { CompraCliente } from 'src/app/entity/compra-cliente';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-nova-compra',
@@ -24,7 +24,9 @@ export class NovaCompraComponent implements OnInit {
 
 	constructor(
 		private formBuilder: FormBuilder,
-		private modalService : BsModalService) { }
+		private modalService : BsModalService,
+		private compraService : CompraService,
+		private router: Router) { }
 
 	ngOnInit() {
 		this.formNovaCompra = this.formBuilder.group({
@@ -188,7 +190,20 @@ export class NovaCompraComponent implements OnInit {
 	formNovaCompraSubmit() {
 		this.formSubmitted = true;
 		if (this.formNovaCompra.valid) {
-			alert('ok');
+
+			let compra = JSON.parse(JSON.stringify(this.formNovaCompra.value));
+			delete compra.clienteDesc;
+			delete compra.enderecoEntregaDesc;
+
+			for (var i = 0; i < compra.produtos.length; i++) {
+				let prod = compra.produtos[i];
+				delete prod.produtoDesc;
+			}
+
+			this.compraService.save(compra).subscribe((res) => {
+				alert('Compra salva com sucesso.');
+				this.router.navigate(['/compras/listar']);
+			})
 		}
 	}
 
