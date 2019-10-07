@@ -1,8 +1,6 @@
 <form name="formNovaCompra" [formGroup]="formNovaCompra" novalidate  (ngSubmit)="formNovaCompraSubmit()">
     <app-page-title title="Nova compra"></app-page-title>
-    <div class="row">
-        {{ formNovaCompra.valid }}
-    </div>
+
     <div class="row">
         <div class="form-group col-xs-12 col-6">
             <label  for="cliente">Cliente</label>

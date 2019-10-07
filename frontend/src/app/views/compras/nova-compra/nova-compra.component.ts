@@ -148,7 +148,7 @@ export class NovaCompraComponent implements OnInit {
 		let valor : number = 0;
 
 		for (let i = 0; i < this.formListaProdutos.controls.length; i++) {
-			let formGroup : FormGroup = this.formListaProdutos.controls[i];
+			let formGroup : FormGroup = this.formListaProdutos.controls[i] as FormGroup;
 			let itemQuantidade : number = formGroup.controls.quantidade.value;
 			let itemValorTotal : number = formGroup.controls.valorTotal.value;
 			
