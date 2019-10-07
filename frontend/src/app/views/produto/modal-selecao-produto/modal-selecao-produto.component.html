@@ -1,0 +1,49 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Seleção de produtos</h4>
+</div>
+<div class="modal-body">
+    <form name="formSelecaoProduto">
+        <table class="table table-bordered bg-white mt-2" [ngClass]="{ 'table-hover' : produtos.length > 0 }">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Marca</th>
+                    <th>Preço</th>
+                    <th class="col-opcoes">Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngIf="produtos.length > 0">
+                    <tr *ngFor="let produto of produtos">
+                        <td>{{ produto.nome }}</td>
+                        <td>{{ produto.marca }}</td>
+                        <td>{{ produto.preco | currency:'BRL' }}</td>
+                        <td>
+                            <div class="d-flex justify-content-around">
+                                <button type="button" class="btn border border-primary"
+                                    tooltip="Iniciar nova compra." placement="left"
+                                    container="body" (click)="select(produto)">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
+                <ng-container *ngIf="produtos.length == 0">
+                    <tr>
+                        <td colspan="4">
+                            Nenhum produto foi encontrada.
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+        <pagination [totalItems]="totalItens" [itemsPerPage]="itemsPerPage" (pageChanged)="pageChanged($event)" 
+            [(ngModel)]="currentPage" [ngModelOptions]="{standalone: true}"
+            previousText="Anterior" nextText="Próxima">
+        </pagination>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="select(null)">Fechar</button>
+</div>
