@@ -50,6 +50,10 @@ export class ListaComprasComponent implements OnInit {
 		this.compraService.findAll(page, size).subscribe((res) => {
 			this.compras = res['data'];
 			this.totalItens = res['total'];
+
+			for (var i = 0; i < this.compras.length; i++) {
+				this.compras[i].dataCompra = new Date(this.compras[i].dataCompra);
+			}
 		})
 	}
 
