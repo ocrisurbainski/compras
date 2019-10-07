@@ -1,0 +1,53 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Seleção de cliente</h4>
+</div>
+<div class="modal-body">
+    <form name="formSelecaoCliente">
+        <table class="table table-bordered bg-white mt-2" [ngClass]="{ 'table-hover' : clientes.length > 0 }">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Tipo de pessoa</th>
+                    <th>Número documento</th>
+                    <th>Endereço</th>
+                    <th class="col-opcoes">Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngIf="clientes.length > 0">
+                    <tr *ngFor="let cliente of clientes">
+                        <td>{{ cliente.nome }}</td>
+                        <td>{{ cliente.email }}</td>
+                        <td>{{ cliente.tipoPessoa }}</td>
+                        <td>{{ cliente.numeroDocumento | cnpjCpf }}</td>
+                        <td>{{ cliente.endereco.logradouro }}, {{ cliente.endereco.bairro }}, nº {{ cliente.endereco.numero }}, {{ cliente.endereco.municipio }} {{ cliente.endereco.siglaEstado }}, CEP: {{ cliente.endereco.cep | cep }}</td>
+                        <td>
+                            <div class="d-flex justify-content-around">
+                                <button type="button" class="btn border border-primary"
+                                    tooltip="Selecionar cliente." placement="left"
+                                    container="body" (click)="select(cliente)">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
+                <ng-container *ngIf="clientes.length == 0">
+                    <tr>
+                        <td colspan="6">
+                            Nenhum cliente foi encontrada.
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+        <pagination [totalItems]="totalItens" [itemsPerPage]="itemsPerPage" (pageChanged)="pageChanged($event)" 
+            [(ngModel)]="currentPage" [ngModelOptions]="{standalone: true}"
+            previousText="Anterior" nextText="Próxima">
+        </pagination>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="select(null)">Fechar</button>
+</div>
