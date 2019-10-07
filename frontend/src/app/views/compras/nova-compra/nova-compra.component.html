@@ -1,1 +1,138 @@
-<app-page-title title="Nova compra"></app-page-title>
+<form name="formNovaCompra" [formGroup]="formNovaCompra" novalidate  (ngSubmit)="formNovaCompraSubmit()">
+    <app-page-title title="Nova compra"></app-page-title>
+    <div class="row">
+        {{ formNovaCompra.valid }}
+    </div>
+    <div class="row">
+        <div class="form-group col-xs-12 col-6">
+            <label  for="cliente">Cliente</label>
+            <div class="input-group">
+                <input  id="cliente" 
+                        name="cliente" 
+                        class="form-control"
+                        formControlName="clienteDesc"
+                        [ngClass]="{ 'was-validated is-invalid' : form.clienteDesc.invalid && (formSubmitted || form.clienteDesc.dirty || form.clienteDesc.touched) }"
+                        readonly >
+                <div class="input-group-append" (click)="openModalSelectCliente()">
+                    <span class="input-group-text">
+                        <i class="fas fa-search"></i>
+                    </span>
+                </div>
+                <div *ngIf="form.clienteDesc.invalid && (formSubmitted || form.clienteDesc.dirty || form.clienteDesc.touched)" class="invalid-feedback">
+                    <p>Campo obrigatório.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-xs-12 col-6">
+            <label  for="enderecoEntrega">Endereço {{ form.enderecoEntregaDesc.valid }}</label>
+            <input  id="enderecoEntrega"
+                    name="enderecoEntrega" 
+                    formControlName="enderecoEntregaDesc"
+                    class="form-control"
+                    [ngClass]="{ 'was-validated is-invalid' : form.enderecoEntregaDesc.invalid && (formSubmitted || form.enderecoEntregaDesc.dirty || form.enderecoEntregaDesc.touched) }"
+                    readonly>
+            <div *ngIf="form.enderecoEntregaDesc.invalid && (formSubmitted || form.enderecoEntregaDesc.dirty || form.enderecoEntregaDesc.touched)" class="invalid-feedback">
+                <p>Campo obrigatório.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-6 col-4">
+            <label>Produto</label>
+        </div>
+        <div class="col-xs-2 col-2">
+            <label>Quantidade</label>
+        </div>
+        <div class="col-xs-2 col-2">
+            <label>Valor unitário</label>
+        </div>
+        <div class="col-xs-2 col-2">
+            <label>Total</label>
+        </div>
+    </div>
+
+    <div *ngFor="let prodCompra of formListaProdutos.controls; let i = index" class="row" [formGroup]="prodCompra">
+        <div class="form-group col-xs-6 col-4">
+            <div class="input-group">
+                <input  formControlName="produtoDesc"
+                        class="form-control"
+                        [ngClass]="{ 'was-validated is-invalid' : prodCompra.controls.produtoDesc.invalid && (formSubmitted || prodCompra.controls.produtoDesc.dirty || prodCompra.controls.produtoDesc.touched) }"
+                        readonly />
+                    <div class="input-group-append" (click)="openModalSelectProduto(i)">
+                        <span class="input-group-text">
+                            <i class="fas fa-search"></i>
+                        </span>
+                    </div>
+                <div *ngIf="prodCompra.controls.produtoDesc.invalid && (formSubmitted || dirty || prodCompra.controls.produtoDesc.touched)" class="invalid-feedback">
+                    <p>Campo obrigatório.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-xs-2 col-2">
+            <input  type="number"
+                    class="form-control"
+                    formControlName="quantidade"
+                    [ngClass]="{ 'was-validated is-invalid' : prodCompra.controls.quantidade.invalid && (formSubmitted || prodCompra.controls.quantidade.dirty || prodCompra.controls.quantidade.touched) }"
+                    [readonly]="prodCompra.controls.produtoDesc.invalid">
+            <div *ngIf="prodCompra.controls.quantidade.invalid && (formSubmitted || prodCompra.controls.quantidade.dirty || prodCompra.controls.quantidade.touched)" class="invalid-feedback">
+                <p *ngIf="prodCompra.controls.quantidade.errors.required">Campo obrigatório.</p>
+                <p *ngIf="prodCompra.controls.quantidade.errors.min">Valor mínimo é '0.01'.</p>
+            </div>
+        </div>
+
+        <div class="form-group col-xs-2 col-2">
+            <input  type="number"
+                    class="form-control"
+                    formControlName="valorUnitario"
+                    [ngClass]="{ 'was-validated is-invalid' : prodCompra.controls.valorUnitario.invalid && (formSubmitted || prodCompra.controls.valorUnitario.dirty || prodCompra.controls.valorUnitario.touched) }"
+                    [readonly]="prodCompra.controls.produtoDesc.invalid">
+            <div *ngIf="prodCompra.controls.valorUnitario.invalid && (formSubmitted || prodCompra.controls.valorUnitario.dirty || prodCompra.controls.valorUnitario.touched)" class="invalid-feedback">
+                <p *ngIf="prodCompra.controls.valorUnitario.errors.required">Campo obrigatório.</p>
+                <p *ngIf="prodCompra.controls.valorUnitario.errors.min">Valor mínimo é '0.01'.</p>
+            </div>
+        </div>
+
+        <div class="form-group col-xs-2 col-2">
+            <input  type="number"
+                    class="form-control"
+                    formControlName="valorTotal"
+                    [ngClass]="{ 'was-validated is-invalid' : prodCompra.controls.valorTotal.invalid && (formSubmitted || prodCompra.controls.valorTotal.dirty || prodCompra.controls.valorTotal.touched) }"
+                    readonly>
+            <div *ngIf="prodCompra.controls.valorTotal.invalid && (formSubmitted || prodCompra.controls.valorTotal.dirty || prodCompra.controls.valorTotal.touched)" class="invalid-feedback">
+                <p *ngIf="prodCompra.controls.valorTotal.errors.required">Campo obrigatório.</p>
+                <p *ngIf="prodCompra.controls.valorTotal.errors.min">Valor mínimo é '0.01'.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-xs-6 col-4">
+            <button type="button" class="btn btn-light" (click)="addProdutoCompra()"
+                tooltip="Adicionar novo produto para a compra." placement="right">
+                <i class="fas fa-plus"></i>
+                Adicionar
+            </button>
+        </div>
+
+        <div class="form-group col-xs-2 col-2">
+            {{ form.quantidadeTotal.value | number:'1.2-2' }}
+        </div>
+
+        <div class="form-group col-xs-2 col-2"></div>
+
+        <div class="form-group col-xs-2 col-2">
+            {{ form.valorTotal.value | number:'1.2-2' }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-12">
+            <button class="btn btn-primary">
+                Salvar
+            </button>
+        </div>
+    </div>
+</form>
