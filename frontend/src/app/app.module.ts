@@ -13,7 +13,7 @@ import { DefaultIndexComponent } from './views/default-index/default-index.compo
 import { PageTitleComponent } from './componente/page-title/page-title.component';
 import { NovaCompraComponent } from './views/compras/nova-compra/nova-compra.component';
 import { ListaComprasComponent } from './views/compras/lista-compras/lista-compras.component';
-import { ModalSelecaoClienteComponent } from './views/clientes/modal-selecao-cliente/modal-selecao-cliente.component';
+import { ListaClientesComponent } from './views/clientes/lista-clientes/lista-clientes.component';
 import { ModalCompraProdutosComponent } from './views/compras/lista-compras/modal-compra-produtos/modal-compra-produtos.component';
 import { ModalSelecaoProdutoComponent } from './views/produto/modal-selecao-produto/modal-selecao-produto.component';
 
@@ -25,7 +25,7 @@ import { CompraService } from './service/compra.service';
 import { ProdutoService } from './service/produto.service';
 
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { ModalModule } from 'ngx-bootstrap';
+import { ModalModule, BsModalRef } from 'ngx-bootstrap/modal';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 @NgModule({
@@ -38,7 +38,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 		PageTitleComponent,
 		NovaCompraComponent,
 		ListaComprasComponent,
-		ModalSelecaoClienteComponent,
+		ListaClientesComponent,
 		ModalSelecaoProdutoComponent,
 		ModalCompraProdutosComponent,
 		CnpjCpfPipe,
@@ -59,13 +59,14 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 	],
 	entryComponents: [
 		ModalCompraProdutosComponent,
-		ModalSelecaoClienteComponent,
+		ListaClientesComponent,
 		ModalSelecaoProdutoComponent
 	],
 	providers: [
 		ClienteService,
 		CompraService,
-		ProdutoService
+		ProdutoService,
+		BsModalRef
 	],
 	bootstrap: [AppComponent]
 })

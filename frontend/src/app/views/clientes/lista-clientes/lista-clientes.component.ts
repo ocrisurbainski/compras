@@ -5,11 +5,11 @@ import { BsModalRef } from 'ngx-bootstrap';
 import { Subject } from 'rxjs';
 
 @Component({
-	selector: 'app-modal-selecao-cliente',
-	templateUrl: './modal-selecao-cliente.component.html',
-	styleUrls: ['./modal-selecao-cliente.component.css']
+	selector: 'app-lista-clientes',
+	templateUrl: './lista-clientes.component.html',
+	styleUrls: ['./lista-clientes.component.css']
 })
-export class ModalSelecaoClienteComponent implements OnInit {
+export class ListaClientesComponent implements OnInit {
 
 	public totalItens : number = 0;
 
@@ -21,13 +21,22 @@ export class ModalSelecaoClienteComponent implements OnInit {
 
 	public onClose : Subject<Cliente>;
 
+	public modal : boolean;
+
+	public tituloTela : string;
+
 	constructor(
 		private clienteService : ClienteService,
-		public bsModalRef : BsModalRef) { }
+		private bsModalRef : BsModalRef) { }
 
 	ngOnInit() {
 		this.onClose = new Subject();
 		this.findAll(this.currentPage, this.itemsPerPage);
+
+		this.tituloTela = 'Seleção de cliente';
+		if (!this.modal) {
+			this.tituloTela = 'Pesquisa de clientes';
+		}
 	}
 
 	pageChanged(event : any) {

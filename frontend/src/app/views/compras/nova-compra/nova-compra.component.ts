@@ -5,7 +5,7 @@ import { Cliente } from 'src/app/entity/cliente';
 import { Endereco } from 'src/app/entity/endereco';
 import { CepPipe } from 'src/app/pipe/cep.pipe';
 import { CompraService } from 'src/app/service/compra.service';
-import { ModalSelecaoClienteComponent } from '../../clientes/modal-selecao-cliente/modal-selecao-cliente.component';
+import { ListaClientesComponent } from '../../clientes/lista-clientes/lista-clientes.component';
 import { ModalSelecaoProdutoComponent } from '../../produto/modal-selecao-produto/modal-selecao-produto.component';
 import { Router } from '@angular/router';
 
@@ -59,8 +59,9 @@ export class NovaCompraComponent implements OnInit {
 		modalOptions.backdrop = 'static';
 		modalOptions.ignoreBackdropClick = true;
 		modalOptions.initialState = {
+			'modal': true
 		};
-		this.modalService.show(ModalSelecaoClienteComponent, modalOptions).content.onClose.subscribe(result => {
+		this.modalService.show(ListaClientesComponent, modalOptions).content.onClose.subscribe(result => {
 			let nome : string = null;
 			if (result != null) {
 				nome = result.nome;
