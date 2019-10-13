@@ -1,7 +1,8 @@
-<div class="modal-header">
-    <h4 class="modal-title pull-left">Seleção de produtos</h4>
+<app-page-title title="{{ tituloTela }}" *ngIf="!modal"></app-page-title>
+<div class="modal-header" *ngIf="modal">
+    <h4 class="modal-title pull-left">{{ tituloTela }}</h4>
 </div>
-<div class="modal-body">
+<div [ngClass]="{ 'modal-body' : modal }">
     <form name="formSelecaoProduto">
         <table class="table table-bordered bg-white mt-2" [ngClass]="{ 'table-hover' : produtos.length > 0 }">
             <thead>
@@ -22,7 +23,8 @@
                             <div class="d-flex justify-content-around">
                                 <button type="button" class="btn border border-primary"
                                     tooltip="Iniciar nova compra." placement="left"
-                                    container="body" (click)="select(produto)">
+                                    container="body" (click)="select(produto)"
+                                    *ngIf="modal">
                                     <i class="fas fa-shopping-cart"></i>
                                 </button>
                             </div>
@@ -44,6 +46,6 @@
         </pagination>
     </form>
 </div>
-<div class="modal-footer">
+<div class="modal-footer" *ngIf="modal">
     <button type="button" class="btn btn-secondary" (click)="select(null)">Fechar</button>
 </div>

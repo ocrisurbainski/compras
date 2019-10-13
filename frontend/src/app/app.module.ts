@@ -14,8 +14,8 @@ import { PageTitleComponent } from './componente/page-title/page-title.component
 import { NovaCompraComponent } from './views/compras/nova-compra/nova-compra.component';
 import { ListaComprasComponent } from './views/compras/lista-compras/lista-compras.component';
 import { ListaClientesComponent } from './views/clientes/lista-clientes/lista-clientes.component';
+import { ListaProdutosComponent } from './views/produtos/lista-produtos/lista-produtos.component';
 import { ModalCompraProdutosComponent } from './views/compras/lista-compras/modal-compra-produtos/modal-compra-produtos.component';
-import { ModalSelecaoProdutoComponent } from './views/produto/modal-selecao-produto/modal-selecao-produto.component';
 
 import { CnpjCpfPipe } from './pipe/cnpj-cpf.pipe';
 import { CepPipe } from './pipe/cep.pipe';
@@ -39,7 +39,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 		NovaCompraComponent,
 		ListaComprasComponent,
 		ListaClientesComponent,
-		ModalSelecaoProdutoComponent,
+		ListaProdutosComponent,
 		ModalCompraProdutosComponent,
 		CnpjCpfPipe,
 		CepPipe
@@ -60,7 +60,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 	entryComponents: [
 		ModalCompraProdutosComponent,
 		ListaClientesComponent,
-		ModalSelecaoProdutoComponent
+		ListaProdutosComponent
 	],
 	providers: [
 		ClienteService,

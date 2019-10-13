@@ -5,11 +5,11 @@ import { BsModalRef } from 'ngx-bootstrap';
 import { Subject } from 'rxjs';
 
 @Component({
-	selector: 'app-modal-selecao-produto',
-	templateUrl: './modal-selecao-produto.component.html',
-	styleUrls: ['./modal-selecao-produto.component.css']
+	selector: 'app-lista-produtos',
+	templateUrl: './lista-produtos.component.html',
+	styleUrls: ['./lista-produtos.component.css']
 })
-export class ModalSelecaoProdutoComponent implements OnInit {
+export class ListaProdutosComponent implements OnInit {
 
 	public totalItens : number = 0;
 
@@ -21,6 +21,10 @@ export class ModalSelecaoProdutoComponent implements OnInit {
 
 	public onClose : Subject<Produto>;
 
+	public modal : boolean;
+
+	public tituloTela : string;
+
 	constructor(
 		private produtoService : ProdutoService,
 		public bsModalRef : BsModalRef) { }
@@ -28,6 +32,11 @@ export class ModalSelecaoProdutoComponent implements OnInit {
 	ngOnInit() {
 		this.onClose = new Subject();
 		this.findAll(this.currentPage, this.itemsPerPage);
+
+		this.tituloTela = 'Seleção de produtos';
+		if (!this.modal) {
+			this.tituloTela = 'Pesquisa de produtos';
+		}
 	}
 
 	pageChanged(event : any) {
