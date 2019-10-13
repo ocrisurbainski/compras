@@ -27,7 +27,7 @@ import br.com.urbainski.backend.service.ClienteService;
  * @since 28/09/2019
  *
  */
-@Path("/clientes")
+@Path("/api/clientes")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class ClienteResource {

@@ -24,7 +24,7 @@ import br.com.urbainski.backend.service.CompraService;
  * @since 29/09/2019
  *
  */
-@Path("/compras")
+@Path("/api/compras")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class CompraResource {

@@ -11,7 +11,7 @@ export abstract class AbstractService {
 	private httpOptions : Object;
 
 	constructor() {
-		this.defaultUrlApi = 'http://localhost:8080';
+		this.defaultUrlApi = 'http://localhost:8080/api';
 		this.httpHeaders = new HttpHeaders()
 			.set('Content-Type', 'application/json');
 		this.httpOptions = {

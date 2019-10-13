@@ -27,7 +27,7 @@ import br.com.urbainski.backend.service.ProdutoService;
  * @since 28/09/2019
  *
  */
-@Path("/produtos")
+@Path("/api/produtos")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ProdutoResource {
