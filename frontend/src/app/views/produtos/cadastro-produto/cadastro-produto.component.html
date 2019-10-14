@@ -1,0 +1,53 @@
+<form name="formCadastroProduto" [formGroup]="formCadastroProduto" novalidate (ngSubmit)="formCadastroProdutoSubmit()">
+    <app-page-title title="Cadastro de produto"></app-page-title>
+    <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4">
+            <label  for="nome">Nome</label>
+            <input  id="nome"
+                    name="nome" 
+                    type="text"
+                    formControlName="nome"
+                    class="form-control"
+                    [ngClass]="{ 'was-validated is-invalid' : form.nome.invalid && (formSubmitted || form.nome.dirty || form.nome.touched) }"
+                    autofocus>
+            <div *ngIf="form.nome.invalid && (formSubmitted || form.nome.dirty || form.nome.touched)" class="invalid-feedback">
+                <p *ngIf="form.nome.errors.required">Campo obrigatório.</p>
+                <p *ngIf="form.nome.errors.minlength">Deve ser informado no mínimo {{ form.nome.errors.minlength.requiredLength }} caracteres para este campo.</p>
+            </div>
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-4">
+            <label  for="marca">Marca</label>
+            <input  id="marca"
+                    name="marca" 
+                    type="text"
+                    formControlName="marca"
+                    class="form-control"
+                    [ngClass]="{ 'was-validated is-invalid' : form.marca.invalid && (formSubmitted || form.marca.dirty || form.marca.touched) }">
+            <div *ngIf="form.marca.invalid && (formSubmitted || form.marca.dirty || form.marca.touched)" class="invalid-feedback">
+                <p>Campo obrigatório.</p>
+            </div>
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-3">
+            <label  for="preco">Preço</label>
+            <input  id="preco"
+                    name="preco" 
+                    type="number"
+                    formControlName="preco"
+                    class="form-control"
+                    [ngClass]="{ 'was-validated is-invalid' : form.preco.invalid && (formSubmitted || form.preco.dirty || form.preco.touched) }">
+            <div *ngIf="form.preco.invalid && (formSubmitted || form.preco.dirty || form.preco.touched)" class="invalid-feedback">
+                <p *ngIf="form.preco.errors.required">Campo obrigatório.</p>
+                <p *ngIf="form.preco.errors.min">O valor mínimo para este campoe é {{ form.preco.errors.min.min }}.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-12">
+            <button class="btn btn-primary">
+                Salvar
+            </button>
+        </div>
+    </div>
+</form>

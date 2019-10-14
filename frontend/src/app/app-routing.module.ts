@@ -5,14 +5,16 @@ import { DefaultIndexComponent } from './views/default-index/default-index.compo
 import { ListaComprasComponent } from './views/compras/lista-compras/lista-compras.component';
 import { ListaClientesComponent } from './views/clientes/lista-clientes/lista-clientes.component';
 import { ListaProdutosComponent } from './views/produtos/lista-produtos/lista-produtos.component';
+import { CadastroProdutoComponent } from './views/produtos/cadastro-produto/cadastro-produto.component';
 import { NovaCompraComponent } from './views/compras/nova-compra/nova-compra.component';
 
 const routes: Routes = [
-	{ path: '', 				component: DefaultIndexComponent },
-	{ path: 'clientes/listar',  component: ListaClientesComponent },
-	{ path: 'produtos/listar',  component: ListaProdutosComponent },
-	{ path: 'compras/listar', 	component: ListaComprasComponent },
-	{ path: 'compras/nova', 	component: NovaCompraComponent }
+	{ path: '', 				   component: DefaultIndexComponent },
+	{ path: 'clientes/listar',     component: ListaClientesComponent },
+	{ path: 'produtos/listar',     component: ListaProdutosComponent },
+	{ path: 'produtos/cadastrar',  component: CadastroProdutoComponent },
+	{ path: 'compras/listar', 	   component: ListaComprasComponent },
+	{ path: 'compras/nova', 	   component: NovaCompraComponent }
 ];
 
 @NgModule({

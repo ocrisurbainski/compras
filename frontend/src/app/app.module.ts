@@ -14,6 +14,7 @@ import { PageTitleComponent } from './componente/page-title/page-title.component
 import { NovaCompraComponent } from './views/compras/nova-compra/nova-compra.component';
 import { ListaComprasComponent } from './views/compras/lista-compras/lista-compras.component';
 import { ListaClientesComponent } from './views/clientes/lista-clientes/lista-clientes.component';
+import { CadastroProdutoComponent } from './views/produtos/cadastro-produto/cadastro-produto.component';
 import { ListaProdutosComponent } from './views/produtos/lista-produtos/lista-produtos.component';
 import { ModalCompraProdutosComponent } from './views/compras/lista-compras/modal-compra-produtos/modal-compra-produtos.component';
 
@@ -39,6 +40,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 		NovaCompraComponent,
 		ListaComprasComponent,
 		ListaClientesComponent,
+		CadastroProdutoComponent,
 		ListaProdutosComponent,
 		ModalCompraProdutosComponent,
 		CnpjCpfPipe,
