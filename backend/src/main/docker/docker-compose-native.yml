@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+    backend:
+        build: 
+            context: .
+            dockerfile: 'src/main/docker/Dockerfile.native'
+        container_name: backend
+        hostname: 'backend'
+        links: 
+            - "mongodb"
+            - "rabbitmq"
+        depends_on: 
+            - "mongodb"
+            - "rabbitmq"
+        ports:
+            - "8080:8080"
+    mongodb:
+        image: mongo:latest
+        container_name: mongodb
+        command: ["--auth"]
+        hostname: 'mongodb'
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: 'user'
+            MONGO_INITDB_ROOT_PASSWORD: 'password'
+        ports: 
+            - "27017:27017"
+        volumes:
+            - /home/cristian/desenvolvimento/dockers/data/mongodb:/data/db:rw
+    rabbitmq:
+        image: 'rabbitmq:3-management'
+        container_name: rabbitmq
+        hostname: 'rabbitmq'
+        environment: 
+            RABBITMQ_ERLANG_COOKIE: 'SWQOKODSQALRPCLNMEQG'
+            RABBITMQ_DEFAULT_USER: 'rabbitmq'
+            RABBITMQ_DEFAULT_PASS: 'rabbitmq'
+            RABBITMQ_DEFAULT_VHOST: '/'
+        ports:
+            - '15672:15672'
+            - '5672:5672'
+    start_dependencies:
+        image: dadarek/wait-for-dependencies
+        depends_on: 
+            - "mongodb"
+            - "rabbitmq"
+        command: mongodb:27017 rabbitmq:5672 rabbitmq:15672
