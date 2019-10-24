@@ -14,6 +14,14 @@ export class ClienteService extends AbstractService {
 		super();
 	}
 
+	save(cliente : Cliente) : Observable<Cliente> {
+		let url : string = this.getCompleteUrl('/clientes');
+		return this.http.post<Cliente>(url, cliente).pipe(
+			retry(1),
+			catchError(this.handleError)
+		);
+	}
+
 	findAll(page : number, size : number) : Observable<Cliente[]> {
 		let params = new HttpParams().set('page', String(page)).set('size', String(size));
 		let url : string = this.getCompleteUrl('/clientes');

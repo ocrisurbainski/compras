@@ -1,0 +1,198 @@
+<form name="formCadastroCliente" [formGroup]="formCadastroCliente" novalidate (ngSubmit)="formCadastroClienteSubmit()">
+    <app-page-title title="Cadastro de cliente"></app-page-title>
+    <div class="row">
+        <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-5">
+            <label  for="nome">Nome</label>
+            <input  id="nome"
+                    name="nome" 
+                    type="text"
+                    formControlName="nome"
+                    class="form-control"
+                    [ngClass]="{ 'was-validated is-invalid' : formPrincipal.nome.invalid && (formSubmitted || formPrincipal.nome.dirty || formPrincipal.nome.touched) }"
+                    autofocus>
+            <div *ngIf="formPrincipal.nome.invalid && (formSubmitted || formPrincipal.nome.dirty || formPrincipal.nome.touched)" class="invalid-feedback">
+                <p *ngIf="formPrincipal.nome.errors.required">Campo obrigatório.</p>
+                <p *ngIf="formPrincipal.nome.errors.minlength">Deve ser informado no mínimo {{ formPrincipal.nome.errors.minlength.requiredLength }} caracteres para este campo.</p>
+            </div>
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-6 col-md-6 col-lg-5">
+            <label  for="email">Email</label>
+            <input  id="email"
+                    name="email" 
+                    type="email"
+                    formControlName="email"
+                    class="form-control"
+                    [ngClass]="{ 'was-validated is-invalid' : formPrincipal.email.invalid && (formSubmitted || formPrincipal.email.dirty || formPrincipal.email.touched) }">
+            <div *ngIf="formPrincipal.email.invalid && (formSubmitted || formPrincipal.email.dirty || formPrincipal.email.touched)" class="invalid-feedback">
+                <p *ngIf="formPrincipal.email.errors.required">Campo obrigatório.</p>
+                <p *ngIf="formPrincipal.email.errors.email">Email inválido.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-2">
+            <label  for="tipoPessoa">Tipo de pessoa</label>
+            <select id="tipoPessoa"
+                    name="tipoPessoa" 
+                    type="number"
+                    formControlName="tipoPessoa"
+                    class="form-control"
+                    [ngClass]="{ 'was-validated is-invalid' : formPrincipal.tipoPessoa.invalid && (formSubmitted || formPrincipal.tipoPessoa.dirty || formPrincipal.tipoPessoa.touched) }">
+                <option *ngFor="let option of tipoPessoaValues" [ngValue]="option.value">{{ option.label }}</option>
+            </select>
+            <div *ngIf="formPrincipal.tipoPessoa.invalid && (formSubmitted || formPrincipal.tipoPessoa.dirty || formPrincipal.tipoPessoa.touched)" class="invalid-feedback">
+                <p *ngIf="formPrincipal.tipoPessoa.errors.required">Campo obrigatório.</p>
+            </div>
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-3" *ngIf="isTipoPessoaFisica">
+            <label  for="cpf">CPF</label>
+            <input  id="cpf"
+                    name="cpf" 
+                    type="text"
+                    formControlName="cpf"
+                    class="form-control"
+                    [ngClass]="{ 'was-validated is-invalid' : formPrincipal.cpf.invalid && (formSubmitted || formPrincipal.cpf.dirty || formPrincipal.cpf.touched) }">
+            <div *ngIf="formPrincipal.cpf.invalid && (formSubmitted || formPrincipal.cpf.dirty || formPrincipal.cpf.touched)" class="invalid-feedback">
+                <p *ngIf="formPrincipal.cpf.errors.required">Campo obrigatório.</p>
+            </div>
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-3" *ngIf="isTipoPessoaJuridica">
+            <label  for="cnpj">CNPJ</label>
+            <input  id="cnpj"
+                    name="cnpj" 
+                    type="text"
+                    formControlName="cnpj"
+                    class="form-control"
+                    [ngClass]="{ 'was-validated is-invalid' : formPrincipal.cnpj.invalid && (formSubmitted || formPrincipal.cnpj.dirty || formPrincipal.cnpj.touched) }">
+            <div *ngIf="formPrincipal.cnpj.invalid && (formSubmitted || formPrincipal.cnpj.dirty || formPrincipal.cnpj.touched)" class="invalid-feedback">
+                <p *ngIf="formPrincipal.cnpj.errors.required">Campo obrigatório.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <fieldset>
+                <legend style="font-size: 20px; border-bottom: 1px solid #ccc;">Endereço</legend>
+            </fieldset>
+        </div>
+    </div>
+
+    <div formGroupName="endereco">
+        <div class="row">
+            <div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-2">
+                <label  for="nome">CEP</label>
+                <input  id="cep"
+                        name="cep" 
+                        type="text"
+                        formControlName="cep"
+                        class="form-control"
+                        [ngClass]="{ 'was-validated is-invalid' : formEndereco.cep.invalid && (formSubmitted || formEndereco.cep.dirty || formEndereco.cep.touched) }"
+                        autofocus>
+                <div *ngIf="formEndereco.cep.invalid && (formSubmitted || formEndereco.cep.dirty || formEndereco.cep.touched)" class="invalid-feedback">
+                    <p *ngIf="formEndereco.cep.errors.required">Campo obrigatório.</p>
+                </div>
+            </div>
+    
+            <div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-4">
+                <label  for="nome">Logradouro</label>
+                <input  id="logradouro"
+                        name="logradouro" 
+                        type="text"
+                        formControlName="logradouro"
+                        class="form-control"
+                        [ngClass]="{ 'was-validated is-invalid' : formEndereco.logradouro.invalid && (formSubmitted || formEndereco.logradouro.dirty || formEndereco.logradouro.touched) }"
+                        autofocus>
+                <div *ngIf="formEndereco.logradouro.invalid && (formSubmitted || formEndereco.logradouro.dirty || formEndereco.logradouro.touched)" class="invalid-feedback">
+                    <p *ngIf="formEndereco.logradouro.errors.required">Campo obrigatório.</p>
+                </div>
+            </div>
+    
+            <div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-4">
+                <label  for="nome">Bairro</label>
+                <input  id="bairro"
+                        name="bairro" 
+                        type="text"
+                        formControlName="bairro"
+                        class="form-control"
+                        [ngClass]="{ 'was-validated is-invalid' : formEndereco.bairro.invalid && (formSubmitted || formEndereco.bairro.dirty || formEndereco.bairro.touched) }"
+                        autofocus>
+                <div *ngIf="formEndereco.bairro.invalid && (formSubmitted || formEndereco.bairro.dirty || formEndereco.bairro.touched)" class="invalid-feedback">
+                    <p *ngIf="formEndereco.bairro.errors.required">Campo obrigatório.</p>
+                </div>
+            </div>
+
+            <div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-2">
+                <label  for="nome">Número</label>
+                <input  id="numero"
+                        name="numero" 
+                        type="text"
+                        formControlName="numero"
+                        class="form-control"
+                        [ngClass]="{ 'was-validated is-invalid' : formEndereco.numero.invalid && (formSubmitted || formEndereco.numero.dirty || formEndereco.numero.touched) }"
+                        autofocus>
+                <div *ngIf="formEndereco.numero.invalid && (formSubmitted || formEndereco.numero.dirty || formEndereco.numero.touched)" class="invalid-feedback">
+                    <p *ngIf="formEndereco.numero.errors.required">Campo obrigatório.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-4">
+                <label  for="nome">Município</label>
+                <input  id="municipio"
+                        name="municipio" 
+                        type="text"
+                        formControlName="municipio"
+                        class="form-control"
+                        [ngClass]="{ 'was-validated is-invalid' : formEndereco.municipio.invalid && (formSubmitted || formEndereco.municipio.dirty || formEndereco.municipio.touched) }"
+                        autofocus>
+                <div *ngIf="formEndereco.municipio.invalid && (formSubmitted || formEndereco.municipio.dirty || formEndereco.municipio.touched)" class="invalid-feedback">
+                    <p *ngIf="formEndereco.municipio.errors.required">Campo obrigatório.</p>
+                </div>
+            </div>
+        
+            <div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-2">
+                <label  for="nome">Estado</label>
+                <select  id="estado"
+                        name="estado" 
+                        type="text"
+                        formControlName="siglaEstado"
+                        class="form-control"
+                        [ngClass]="{ 'was-validated is-invalid' : formEndereco.siglaEstado.invalid && (formSubmitted || formEndereco.siglaEstado.dirty || formEndereco.siglaEstado.touched) }"
+                        autofocus>
+                    <option *ngFor="let option of listaEstados" [ngValue]="option.value">{{ option.label }}</option>
+                </select>
+                <div *ngIf="formEndereco.siglaEstado.invalid && (formSubmitted || formEndereco.siglaEstado.dirty || formEndereco.siglaEstado.touched)" class="invalid-feedback">
+                    <p *ngIf="formEndereco.siglaEstado.errors.required">Campo obrigatório.</p>
+                </div>
+            </div>
+        
+            <div class="form-group col-xs-12 col-sm-3 col-md-3 col-lg-4">
+                <label  for="nome">Complemento</label>
+                <input  id="complemento"
+                        name="complemento" 
+                        type="text"
+                        formControlName="complemento"
+                        class="form-control"
+                        [ngClass]="{ 'was-validated is-invalid' : formEndereco.complemento.invalid && (formSubmitted || formEndereco.complemento.dirty || formEndereco.complemento.touched) }"
+                        autofocus>
+                <div *ngIf="formEndereco.complemento.invalid && (formSubmitted || formEndereco.complemento.dirty || formEndereco.complemento.touched)" class="invalid-feedback">
+                    <p *ngIf="formEndereco.complemento.errors.maxlength">Deve ser informado no máximo {{ formEndereco.complemento.errors.maxlength.requiredLength }} caracteres para este campo.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="form-group col-12">
+            <button class="btn btn-primary">
+                Salvar
+            </button>
+        </div>
+    </div>
+</form>

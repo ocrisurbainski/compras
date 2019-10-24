@@ -13,6 +13,7 @@ import { DefaultIndexComponent } from './views/default-index/default-index.compo
 import { PageTitleComponent } from './componente/page-title/page-title.component';
 import { NovaCompraComponent } from './views/compras/nova-compra/nova-compra.component';
 import { ListaComprasComponent } from './views/compras/lista-compras/lista-compras.component';
+import { CadastroClienteComponent } from './views/clientes/cadastro-cliente/cadastro-cliente.component';
 import { ListaClientesComponent } from './views/clientes/lista-clientes/lista-clientes.component';
 import { CadastroProdutoComponent } from './views/produtos/cadastro-produto/cadastro-produto.component';
 import { ListaProdutosComponent } from './views/produtos/lista-produtos/lista-produtos.component';
@@ -39,6 +40,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 		PageTitleComponent,
 		NovaCompraComponent,
 		ListaComprasComponent,
+		CadastroClienteComponent,
 		ListaClientesComponent,
 		CadastroProdutoComponent,
 		ListaProdutosComponent,
